@@ -10,16 +10,16 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "deploy": "gh-pages -d ./dist -e csrf"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
+    "name": "Denis Markin",
     "web": "https://hakim.se"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/denismark94/csrf.git"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -40,6 +40,7 @@
     "colors": "^1.4.0",
     "core-js": "^3.12.1",
     "fitty": "^2.3.0",
+    "gh-pages": "^4.0.0",
     "glob": "^7.1.7",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
