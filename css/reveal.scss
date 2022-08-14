@@ -28,9 +28,10 @@ html.reveal-full-page {
 	position: relative;
 	line-height: 1;
 	margin: 0;
-
-	background-color: #fff;
-	color: #000;
+	// background-color: #fff;
+	background-color: rgb(255, 244, 16);
+	color: rgb(255, 244, 16);
+	// color: #000;
 }
 
 // Force the presentation to cover the full viewport when we
@@ -1817,6 +1818,12 @@ $notesWidthPercent: 25%;
 	visibility: hidden;
 }
 
+.footer {
+	display: none;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items: center
+}
 
 /*********************************************
  * PRINT STYLES

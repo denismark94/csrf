@@ -9,31 +9,106 @@
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/black.css">
-
+		
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1047/1047711.png">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>RS School</h1>
-					<h2>Security</h2>
+					<h2>JS Front/End 2022 Q1</h2>
 					<h3>Cross-Site request Forgery</h3>
-					<h4>Made by @denismark94</h4>
-				</section>
-				<section><h2>Attack scheme</h2></section>
-				<section><h2>Cross-site request example</h2></section>
-				<section><h2>Malicious URL Injection</h2></section>
-				<section>
-					<h2>CSRF Protection</h2>
-					<h3>CSRF Token</h3>
+					<h5>Denis Markin</h5>
+					<div class="footer">
+						<a href="https://rs.school/"><img src="https://rs.school/images/rs_school.svg" alt="rs logo" width="50%"></a>
+						<a href="https://github.com/denismark94"><img src="https://gist.githubusercontent.com/christophermanning/4460135/raw/7278f8125f4508e096396b024304daf238e38b97/octocat.svg" alt="github-logo" width="50%"></a>
+					</div>
 				</section>
 				<section>
-					<h2>CSRF Protection</h2>
-					<h3>CORS Policy</h3>
+					<section>
+						<h2>Attack scheme</h2>
+						<img src="https://www.imperva.com/learn/wp-content/uploads/sites/13/2019/01/csrf-cross-site-request-forgery.png" alt="attack scheme">
+					</section>
+					<section>
+						<h2>Attack steps</h2>
+						<ol>
+							<li class="fragment highlight-current-red">Bob creates website A</li>
+							<li class="fragment highlight-current-red">Bob sends link to Alice</li>
+							<li class="fragment highlight-current-red">Alice logs in website B</li>
+							<li class="fragment highlight-current-red">Alice redirects to A</li>
+							<li class="fragment highlight-current-red">Request with Alice's cookies goes to B</li>
+							<li class="fragment highlight-current-red">B receives request, validate and execute it</li>
+						</ol>
+					</section>
+					<section>
+						<h3>Possible result</h3>
+						<ul>
+							<li>Money transfer operations</li>
+							<li>Personal data access</li>
+							<li>Perform actions on user's behalf</li>
+							<li>First step of more sophisticated attack</li>
+						</ul>
+					</section>
 				</section>
-
+				<section>
+					<h2>Cross-site request example</h2>
+					<section>
+						<h3>Vulnerable website</h3>
+						<pre><code data-line-numbers="1|5|7"><form method='post' action='https://vulnerable.com/transact'>
+	<fieldset>
+		<legend>Money transfer</legend>
+		<label for='recipient'> Recipient:</label>
+		<input name='recipient' id='recipient' type='text'>
+		<label for='money' > Amount:</label>
+		<input name='money' id='money' type='number'>
+		<button type='submit'> Transfer </button>
+	</fieldset>
+</form></code></pre>
+					</section>
+					<section>
+						<h3>Malicious website</h3>
+						<pre><code data-line-numbers="2|3|6"><script type="text/template"><form method='post' action='https://vulnerable.com/transact'>
+	<input type="hidden" name='recipient' value="The Attacker">
+	<input type="hidden" name='money' value="10000">
+</form>
+<script>
+	document.forms[0].submit();
+	...</script>
+</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>CSRF Protection</h2>
+					<section>
+						<h3>HTTP Referer</h3>
+						<img src="https://media.geeksforgeeks.org/wp-content/uploads/20191121104254/Referer.png" alt="Referer Header">
+					</section>
+					<section>
+						<h3>Same Origin Policy</h3>
+						<img src="https://www.appsecmonkey.com/static/images/same-origin-policy/figure-1.jpg" alt="origin contents">
+					</section>
+					<section>
+						<h3>CSRF Token</h3>
+						<div class="r-stack">
+							<pre class="fragment current-visible" ><code data-line-numbers="2"><form action="https://vulnerable.com/transact" method="POST">
+	<input type="hidden" name="csrf" value="1234:5ad02792a325...">
+	<textarea name="message">
+		...
+	</textarea>
+</form></code></pre>
+							<ul class="fragment current-visible">
+								<li>Synchronized Token</li>
+								<li>Double Submit Cookie</li>
+								<li>Encrypted token</li>
+							</ul>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h3>Thank you for watching</h3>
+				</section>
 			</div>
 		</div>
 
